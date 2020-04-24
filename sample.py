@@ -1,23 +1,22 @@
 # see red_blue.py in the examples dir
-import time
-
-import numpy as np
+import cv2
 import pyfakewebcam
 
 width, height = 640, 480
-
-blue = np.zeros((height, width, 3), dtype=np.uint8)
-blue[:, :, 2] = 255
-
-red = np.zeros((height, width, 3), dtype=np.uint8)
-red[:, :, 0] = 255
-
 video_device = '/dev/video1'
+
 camera = pyfakewebcam.FakeWebcam(video_device, width, height)
 
-while True:
-    camera.schedule_frame(red)
-    time.sleep(1 / 30.0)
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
-    camera.schedule_frame(blue)
-    time.sleep(1 / 30.0)
+while True:
+    ret, frame = cap.read()
+    camera.schedule_frame(frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# When everything done, release the capture
+cap.release()
+cv2.destroyAllWindows()
