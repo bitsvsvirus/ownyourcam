@@ -1,4 +1,3 @@
-# see red_blue.py in the examples dir
 import cv2
 import pyfakewebcam
 
@@ -13,6 +12,10 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
 while True:
     ret, frame = cap.read()
+
+    # Convert RGB to BGR
+    frame = frame[...,::-1]
+
     camera.schedule_frame(frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
