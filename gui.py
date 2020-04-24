@@ -36,7 +36,7 @@ def update():
         imgtk = PIL.ImageTk.PhotoImage(image = img)
         label.imgtk = imgtk
         label.configure(image=imgtk)
-    label.after(15, update)
+    label.after(100, update)
 
 
 
