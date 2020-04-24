@@ -1,7 +1,7 @@
 import cv2
 import pyfakewebcam
 
-width, height = 640, 480
+width, height = 1280, 720
 video_device = '/dev/video1'
 
 camera = pyfakewebcam.FakeWebcam(video_device, width, height)
