@@ -1,25 +1,22 @@
 import cv2
 import pyfakewebcam
 
-width, height = 1280, 720
 video_device = '/dev/video1'
 
-camera = pyfakewebcam.FakeWebcam(video_device, width, height)
-
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+rcam = cv2.VideoCapture(0)
+width, height = int(rcam.get(cv2.CAP_PROP_FRAME_WIDTH)), int(rcam.get(cv2.CAP_PROP_FRAME_HEIGHT))
+vcam = pyfakewebcam.FakeWebcam(video_device, width, height)
 
 while True:
-    ret, frame = cap.read()
+    ret, frame = rcam.read()
 
     # Convert RGB to BGR
-    frame = frame[...,::-1]
+    frame = frame[..., ::-1]
 
-    camera.schedule_frame(frame)
+    vcam.schedule_frame(frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 # When everything done, release the capture
-cap.release()
+rcam.release()
 cv2.destroyAllWindows()
