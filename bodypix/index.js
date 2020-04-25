@@ -59,6 +59,7 @@ async function getVideoInputs() {
     }
 
     const devices = await navigator.mediaDevices.enumerateDevices();
+    // eslint-disable-next-line max-len
     const videoDevices = devices.filter((device) => device.kind === 'videoinput');
     return videoDevices;
 }
@@ -213,6 +214,7 @@ async function estimateSegmentation() {
         case 'person':
             return await state.net.segmentPerson(state.video, {
                 internalResolution: guiState.input.internalResolution,
+                // eslint-disable-next-line max-len
                 segmentationThreshold: guiState.segmentation.segmentationThreshold,
                 maxDetections: guiState.multiPersonDecoding.maxDetections,
                 scoreThreshold: guiState.multiPersonDecoding.scoreThreshold,
@@ -230,6 +232,7 @@ async function estimatePartSegmentation() {
         case 'multi-person-instance':
             return await state.net.segmentMultiPersonParts(state.video, {
                 internalResolution: guiState.input.internalResolution,
+                // eslint-disable-next-line max-len
                 segmentationThreshold: guiState.segmentation.segmentationThreshold,
                 maxDetections: guiState.multiPersonDecoding.maxDetections,
                 scoreThreshold: guiState.multiPersonDecoding.scoreThreshold,
@@ -241,6 +244,7 @@ async function estimatePartSegmentation() {
         case 'person':
             return await state.net.segmentPersonParts(state.video, {
                 internalResolution: guiState.input.internalResolution,
+                // eslint-disable-next-line max-len
                 segmentationThreshold: guiState.segmentation.segmentationThreshold,
                 maxDetections: guiState.multiPersonDecoding.maxDetections,
                 scoreThreshold: guiState.multiPersonDecoding.scoreThreshold,
@@ -258,6 +262,7 @@ function drawPoses(personOrPersonPartSegmentation, flipHorizontally, ctx) {
         personOrPersonPartSegmentation.forEach((personSegmentation) => {
             let pose = personSegmentation.pose;
             if (flipHorizontally) {
+                // eslint-disable-next-line max-len
                 pose = bodyPix.flipPoseHorizontal(pose, personSegmentation.width);
             }
             drawKeypoints(pose.keypoints, 0.1, ctx);
@@ -328,18 +333,23 @@ function segmentBodyInRealTime() {
                         };
                         const backgroundColor = {r: 0, g: 0, b: 0, a: 255};
                         const mask = bodyPix.toMask(
+                            // eslint-disable-next-line max-len
                             multiPersonSegmentation, foregroundColor, backgroundColor,
                             true);
 
                         bodyPix.drawMask(
+                            // eslint-disable-next-line max-len
                             canvas, state.video, mask, guiState.segmentation.opacity,
+                            // eslint-disable-next-line max-len
                             guiState.segmentation.maskBlurAmount, flipHorizontally);
+                        // eslint-disable-next-line max-len
                         drawPoses(multiPersonSegmentation, flipHorizontally, ctx);
                         break;
                     case 'bokeh':
                         bodyPix.drawBokehEffect(
                             canvas, state.video, multiPersonSegmentation,
                             +guiState.segmentation.backgroundBlurAmount,
+                            // eslint-disable-next-line max-len
                             guiState.segmentation.edgeBlurAmount, flipHorizontally);
                         break;
                 }
@@ -347,6 +357,7 @@ function segmentBodyInRealTime() {
                 break;
             case 'partmap':
                 const ctx = canvas.getContext('2d');
+                // eslint-disable-next-line max-len
                 const multiPersonPartSegmentation = await estimatePartSegmentation();
                 const coloredPartImageData = bodyPix.toColoredPartMask(
                     multiPersonPartSegmentation,
@@ -359,11 +370,13 @@ function segmentBodyInRealTime() {
 
                         bodyPix.drawPixelatedMask(
                             canvas, state.video, coloredPartImageData,
+                            // eslint-disable-next-line max-len
                             guiState.partMap.opacity, maskBlurAmount, flipHorizontally,
                             pixelCellWidth);
                         break;
                     case 'partMap':
                         bodyPix.drawMask(
+                            // eslint-disable-next-line max-len
                             canvas, state.video, coloredPartImageData, guiState.opacity,
                             maskBlurAmount, flipHorizontally);
                         break;
@@ -371,6 +384,7 @@ function segmentBodyInRealTime() {
                         const blurBodyPartIds = [0, 1];
                         bodyPix.blurBodyPart(
                             canvas, state.video, multiPersonPartSegmentation,
+                            // eslint-disable-next-line max-len
                             blurBodyPartIds, guiState.partMap.blurBodyPartAmount,
                             guiState.partMap.edgeBlurAmount, flipHorizontally);
                 }
