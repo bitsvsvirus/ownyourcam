@@ -1,5 +1,6 @@
 const tf = require('@tensorflow/tfjs-node');
 const bodyPix = require('@tensorflow-models/body-pix');
+const fs = require('fs').promises;
 const http = require('http');
 (async () => {
     const net = await bodyPix.load({
@@ -15,8 +16,9 @@ const http = require('http');
             chunks.push(chunk);
         });
         req.on('end', async () => {
+            // Write image to localfile (for debug purpose)
+            await fs.writeFile('image.jpg', Buffer.concat(chunks));
             const image = tf.node.decodeImage(Buffer.concat(chunks));
-
             segmentation = await net.segmentPerson(image, {
                 internalResolution: "medium",
                 segmentationThreshold: 0.7,
