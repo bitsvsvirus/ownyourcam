@@ -13,7 +13,6 @@ fgbg = cv2.createBackgroundSubtractorKNN()
 def denoise(frame):
     frame = cv2.medianBlur(frame, 5)
     frame = cv2.GaussianBlur(frame, (5, 5), 0)
-
     return frame
 
 
@@ -30,14 +29,24 @@ def get_mask(frame, bodypix_url='http://localhost:9000'):
     return mask
 
 
+# Create a red background.
+replacement_bg = np.zeros((height, width, 3), dtype=np.uint8)
+replacement_bg[:, :, 2] = 255
+
 while True:
-    # Capture frame-by-frame
     ret, frame = rcam.read()
+    # frame = denoise(frame)
     cv2.imshow('Original', frame)
     mask = get_mask(frame)
     cv2.normalize(mask, 0, 255, cv2.NORM_MINMAX)
     cv2.imshow('Mask', mask * 255)
 
+    # Merge original frame and its mask.
+    inv_mask = 1 - mask
+    for c in range(frame.shape[2]):
+        frame[:, :, c] = frame[:, :, c] * mask + replacement_bg[:, :, c] * inv_mask
+
+    cv2.imshow('Merged', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
