@@ -8,8 +8,7 @@ from simulator import Simulator
 
 
 class OwnYourCam:
-    def __init__(self, vcam):
-        self.vcam = vcam
+    def __init__(self):
         self.run()
 
     def run(self):

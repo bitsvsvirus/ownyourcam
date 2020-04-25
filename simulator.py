@@ -57,6 +57,7 @@ class Simulator:
 
             # Write image to virtual cam input.
             if self.stream_to_vcam:
+                merged = cv2.cvtColor(merged, cv2.COLOR_BGR2RGB)
                 self.vcam.schedule_frame(merged)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
