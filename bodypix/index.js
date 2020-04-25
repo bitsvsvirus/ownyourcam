@@ -165,15 +165,15 @@ const defaultResNetInternalResolution = 'low';
 
 const guiState = {
   algorithm: 'multi-person-instance',
-  estimate: 'partmap',
+  estimate: 'segmentation',
   camera: null,
   flipHorizontal: true,
   input: {
     architecture: 'MobileNetV1',
     outputStride: 16,
-    internalResolution: 'low',
+    internalResolution: 'medium',
     multiplier: 0.50,
-    quantBytes: 2
+    quantBytes: 2,
   },
   multiPersonDecoding: {
     maxDetections: 5,
@@ -186,7 +186,7 @@ const guiState = {
     segmentationThreshold: 0.7,
     effect: 'mask',
     maskBackground: true,
-    opacity: 0.7,
+    opacity: 1,
     backgroundBlurAmount: 3,
     maskBlurAmount: 0,
     edgeBlurAmount: 3
@@ -195,11 +195,11 @@ const guiState = {
     colorScale: 'rainbow',
     effect: 'partMap',
     segmentationThreshold: 0.5,
-    opacity: 0.9,
+    opacity: 1.0,
     blurBodyPartAmount: 3,
     bodyPartEdgeBlurAmount: 3,
   },
-  showFps: !isMobile()
+  showFps: false,
 };
 
 function toCameraOptions(cameras) {
@@ -504,16 +504,6 @@ function setShownPartColorScales(colorScale) {
   }
 }
 
-/**
- * Sets up a frames per second panel on the top-left of the window
- */
-function setupFPS() {
-  stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
-  if (guiState.showFps) {
-    document.body.appendChild(stats.dom);
-  }
-}
-
 async function estimateSegmentation() {
   let multiPersonSegmentation = null;
   switch (guiState.algorithm) {
@@ -712,8 +702,8 @@ export async function bindPage() {
 
   let cameras = await getVideoInputs();
 
-  setupFPS();
-  setupGui(cameras);
+  // setupFPS();
+  // setupGui(cameras);
 
   segmentBodyInRealTime();
 }
