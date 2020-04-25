@@ -1,5 +1,9 @@
+certifi==2020.4.5.1
+chardet==3.0.4
+idna==2.9
 numpy==1.18.3
 opencv-python==4.2.0.34
-pkg-resources==0.0.0
-pyfakewebcam==0.1.0
 Pillow==7.1.1
+pyfakewebcam==0.1.0
+requests==2.23.0
+urllib3==1.25.9
