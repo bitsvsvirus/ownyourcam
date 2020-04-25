@@ -2,14 +2,18 @@ import cv2
 import numpy as np
 import requests
 
+from logger import Logger
+
 
 class Simulator:
     def __init__(self, width=None, height=None, video_source=0):
+        self.logger = Logger.logger
         self.videocap = cv2.VideoCapture(video_source)
         if not width or not height:
             width, height = int(self.videocap.get(cv2.CAP_PROP_FRAME_WIDTH)), \
                             int(self.videocap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         # width, height = 640, 480
+        self.logger.info('Create a virtualwebcam with a solution of {}x{}'.format(width, height))
 
         # Configure Videocapture
         self.videocap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
@@ -30,6 +34,7 @@ class Simulator:
         return mask
 
     def simulate(self):
+        self.logger.info("Create a virtual webcam.")
         while True:
             ret, frame = self.videocap.read()
             cv2.imshow('Original', frame)
