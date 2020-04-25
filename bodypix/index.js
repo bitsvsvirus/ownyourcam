@@ -255,7 +255,7 @@ async function estimatePartSegmentation() {
 
 function drawPoses(personOrPersonPartSegmentation, flipHorizontally, ctx) {
     if (Array.isArray(personOrPersonPartSegmentation)) {
-        personOrPersonPartSegmentation.forEach(personSegmentation => {
+        personOrPersonPartSegmentation.forEach((personSegmentation) => {
             let pose = personSegmentation.pose;
             if (flipHorizontally) {
                 pose = bodyPix.flipPoseHorizontal(pose, personSegmentation.width);
@@ -264,7 +264,7 @@ function drawPoses(personOrPersonPartSegmentation, flipHorizontally, ctx) {
             drawSkeleton(pose.keypoints, 0.1, ctx);
         });
     } else {
-        personOrPersonPartSegmentation.allPoses.forEach(pose => {
+        personOrPersonPartSegmentation.allPoses.forEach((pose) => {
             if (flipHorizontally) {
                 pose = bodyPix.flipPoseHorizontal(
                     pose, personOrPersonPartSegmentation.width);
