@@ -1,11 +1,12 @@
-import time
-
 import cv2
 import numpy as np
 import requests
 
 rcam = cv2.VideoCapture(0)
 width, height = int(rcam.get(cv2.CAP_PROP_FRAME_WIDTH)), int(rcam.get(cv2.CAP_PROP_FRAME_HEIGHT))
+width, height = 640, 480
+rcam.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+rcam.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 fgbg = cv2.createBackgroundSubtractorKNN()
 
 
@@ -26,17 +27,18 @@ def get_mask(frame, bodypix_url='http://localhost:9000'):
     # raw data is uint8[width * height] with value 0 or 1
     mask = np.frombuffer(r.content, dtype=np.uint8)
     mask = mask.reshape((frame.shape[0], frame.shape[1]))
+    print(mask)
     return mask
 
 
 while True:
     # Capture frame-by-frame
     ret, frame = rcam.read()
-    # frame = fgbg.apply(frame)
-    # get the foreground
-    print(time.time())
     cv2.imshow('Original', frame)
-    cv2.imshow('Mask', get_mask(frame))
+    mask = get_mask(frame)
+    cv2.normalize(mask, 0, 255, cv2.NORM_MINMAX)
+    cv2.imshow('Mask', mask * 255)
+    cv2.imwrite('mask.jpg', mask)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
