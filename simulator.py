@@ -6,8 +6,10 @@ from logger import Logger
 
 
 class Simulator:
-    def __init__(self, width=None, height=None, video_source=0, bg_path=None, vcam_source='/dev/video1'):
+    def __init__(self, width=None, height=None, video_source=0, bg_path=None, vcam_source='/dev/video1',
+                 stream_to_vam=True):
         self.logger = Logger.logger
+        self.stream_to_vcam = stream_to_vam
         self.videocap = cv2.VideoCapture(video_source)
         if not width or not height:
             width, height = int(self.videocap.get(cv2.CAP_PROP_FRAME_WIDTH)), \
@@ -22,8 +24,9 @@ class Simulator:
         background = cv2.imread(bg_path)
         self.background = cv2.resize(background, (width, height))
 
-        from pyfakewebcam import pyfakewebcam
-        self.vcam = pyfakewebcam.FakeWebcam(vcam_source, width, height)
+        if stream_to_vam:
+            from pyfakewebcam import pyfakewebcam
+            self.vcam = pyfakewebcam.FakeWebcam(vcam_source, width, height)
 
     def get_mask(self, frame, bodypix_url='http://localhost:9000'):
         _, data = cv2.imencode(".jpg", frame)
@@ -53,7 +56,8 @@ class Simulator:
                 cv2.imshow('Merged', merged)
 
             # Write image to virtual cam input.
-            # self.vcam.schedule_frame(merged)
+            if self.stream_to_vcam:
+                self.vcam.schedule_frame(merged)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
@@ -65,4 +69,4 @@ class Simulator:
 
 if __name__ == '__main__':
     simulator = Simulator(width=640, height=480, bg_path='assets/background.png')
-    simulator.simulate(show_stream=False)
+    simulator.simulate(show_stream=True)
