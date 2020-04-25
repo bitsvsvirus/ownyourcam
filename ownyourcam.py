@@ -8,13 +8,12 @@ from simulator import Simulator
 
 
 class OwnYourCam:
-    def __init__(self, vcam):
-        self.vcam = vcam
+    def __init__(self):
         self.run()
 
     def run(self):
         simulator = Simulator(width=640, height=480, bg_path='assets/background.png')
-        simulator.simulate(show_stream=True)
+        simulator.simulate(show_stream=False)
 
 
 if __name__ == "__main__":
