@@ -7,9 +7,9 @@ from logger import Logger
 
 class Simulator:
     def __init__(self, width=None, height=None, video_source=0, bg_path=None, vcam_source='/dev/video1',
-                 stream_to_vam=True):
+                 stream_to_vcam=True):
         self.logger = Logger.logger
-        self.stream_to_vcam = stream_to_vam
+        self.stream_to_vcam = stream_to_vcam
         self.videocap = cv2.VideoCapture(video_source)
         if not width or not height:
             width, height = int(self.videocap.get(cv2.CAP_PROP_FRAME_WIDTH)), \
@@ -24,7 +24,7 @@ class Simulator:
         background = cv2.imread(bg_path)
         self.background = cv2.resize(background, (width, height))
 
-        if stream_to_vam:
+        if stream_to_vcam:
             from pyfakewebcam import pyfakewebcam
             self.vcam = pyfakewebcam.FakeWebcam(vcam_source, width, height)
 
@@ -68,5 +68,10 @@ class Simulator:
 
 
 if __name__ == '__main__':
-    simulator = Simulator(width=640, height=480, bg_path='assets/background.png')
+    simulator = Simulator(
+        width=640,
+        height=480,
+        bg_path='assets/background.png',
+        stream_to_vcam=False
+    )
     simulator.simulate(show_stream=True)
