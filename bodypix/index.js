@@ -177,7 +177,7 @@ const guiState = {
     },
     segmentation: {
         segmentationThreshold: 0.7,
-        effect: 'mask',
+        effect: 'bokeh',
         maskBackground: true,
         opacity: 1,
         backgroundBlurAmount: 3,
