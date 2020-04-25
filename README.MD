@@ -1,17 +1,20 @@
 # OwnYourCam :sunglasses: :video_camera:
 
-Own your cam is a crossplatform, open source, lightweight tool for you to protect your privacy against the growing landscape of video conferencing tools.
+## Motivation / Problem
+In times of Covid-19, many companies, institutions and courses rely on remote measures. Therefore, more and more communication tools are used to replace physical communication with virtual communication. School lessons, university seminars, lectures, conferences and also customer meetings are outsourced to tools like Zoom, Skype, Microsoft-Teams or Slack. The danger of losing aspects of privacy through audio and video communication is higher in times like these. Through video communication, for example, conclusions can be drawn about the life situation of the participants: The living room, bedroom and even family members can be unintentionally part of the video clip.
 
-It serves as a virtual filter between your camera and the video software which uses your camera, to remove the control from the video conferencing software over your webcam.
+## Solution
+As the name suggests, we propose a solution that enables the participants of video conferences to have more control over their webcam. This even works tools independently and is therefore compatible with Zoom, Skype, Microsoft-Teams Slack and many more. The tool 'OwnYourCam' creates a virtual cam device where the participant can be seen but his background can be exchanged with a virtual background.  This video input device can then be selected as a webcam device by communication tools. This protects the privacy of the participants, even if the communication tool does not have the function of displaying a virtual background like "Zoom.us". Furthermore, it also provides more security if the communication tool is compromised, since the insertion of a virtual background is not handled within communication tools.
 
-Features:
+It is important to us to make this tool open-source to maintain transparency and trust.
 
-* Simple to use
+## Supported Platforms
+- Linux Based Systems (tested on Ubuntu & Debian)
+- Mac (in development)
+- Windows (in development)
 
-* Create a virtual webcam to share with the video conferencing tool you are using
-
-* Digital interface to control/deactivate your virtual camera.
-
-* Background recognition, which enables you to switch out your background for your virtual camera.
-
-This project was created during the #EUVsVirus Hackathon. It tackles privacy concerning side effects of the growing usage of video conferencing tools.
+## TL; DR
+- Simple to use
+- Creates a video device with protected modified video stream (see above), which can be selected by software as camera.
+- Fuegt ein virtuelles Hintergrund hinzu um die Privatsphaere des Nutzers zu sichern.
+- Is communication tools independent and therefore compatible with any communication software.
