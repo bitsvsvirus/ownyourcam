@@ -18,8 +18,6 @@ def get_mask(frame, bodypix_url='http://localhost:9000'):
         url=bodypix_url,
         data=data.tobytes(),
         headers={'Content-Type': 'application/octet-stream'})
-    # convert raw bytes to a numpy array
-    # raw data is uint8[width * height] with value 0 or 1
     mask = np.frombuffer(r.content, dtype=np.uint8)
     mask = mask.reshape((frame.shape[0], frame.shape[1]))
     return mask
