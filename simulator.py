@@ -6,7 +6,7 @@ from logger import Logger
 
 
 class Simulator:
-    def __init__(self, width=None, height=None, video_source=0):
+    def __init__(self, width=None, height=None, video_source=0, bg_path=None):
         self.logger = Logger.logger
         self.videocap = cv2.VideoCapture(video_source)
         if not width or not height:
@@ -20,8 +20,8 @@ class Simulator:
         self.videocap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 
         # Create a red background.
-        self.background = np.zeros((height, width, 3), dtype=np.uint8)
-        self.background[:, :, 2] = 255
+        background = cv2.imread(bg_path)
+        self.background = cv2.resize(background, (width, height))
 
     def get_mask(self, frame, bodypix_url='http://localhost:9000'):
         _, data = cv2.imencode(".jpg", frame)
@@ -56,5 +56,5 @@ class Simulator:
 
 
 if __name__ == '__main__':
-    simulator = Simulator(width=640, height=480)
+    simulator = Simulator(width=640, height=480, bg_path='assets/background.png')
     simulator.simulate()
