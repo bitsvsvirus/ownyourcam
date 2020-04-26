@@ -17,7 +17,7 @@ const http = require('http');
         req.on('end', async () => {
             const image = tf.node.decodeImage(Buffer.concat(chunks));
             segmentation = await net.segmentPerson(image, {
-                internalResolution: "high",
+                internalResolution: "medium",
                 segmentationThreshold: 0.7,
                 maxDetections: 1,
                 scoreThreshold: 0.3,
