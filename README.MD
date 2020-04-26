@@ -13,7 +13,7 @@ It is important to us to make this tool open-source to maintain transparency and
 
 ### 2.1 Acknowledgement
 A big thank you goes to the creator of the package 'pyfakewebcam' who ported the v4l2 package from python2 to python3, which was very useful for our project.
-* https://github.com/jremmons/pyfakewebcam
+* https://pypi.org/project/pyfakewebcam
 
 ## 3. Supported Platforms
 - Linux Based Systems (tested on Ubuntu & Debian)
