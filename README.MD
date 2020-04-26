@@ -1,26 +1,26 @@
 # OwnYourCam :sunglasses: :video_camera:
 
-## Motivation / Problem
+## 1. Motivation / Problem
 In times of Covid-19, many companies, institutions and courses rely on remote measures. Therefore, more and more communication tools are used to replace physical communication with virtual communication. School lessons, university seminars, lectures, conferences and also customer meetings are outsourced to tools like Zoom, Skype, Microsoft-Teams or Slack. The danger of losing aspects of privacy through audio and video communication is higher in times like these. Through video communication, for example, conclusions can be drawn about the life situation of the participants: The living room, bedroom and even family members can be unintentionally part of the video clip.
 
-## Solution
+## 2. Solution
 As the name suggests, we propose a solution that enables the participants of video conferences to have more control over their webcam. 'OwnYourTool'is compatible with any communication software (Zoom, Skype, Microsoft-Teams Slack and many more). It creates a virtual cam device where the participant can be seen but his background can be replaced with a virtual background. This video input device can then be selected as a webcam device by communication tools. This protects the privacy of the participants, even if the communication tool does not have the function of displaying a virtual background like "Zoom.us". Furthermore, it also provides more security if the communication tool is compromised, since the insertion of a virtual background is not handled within communication tools.
 
 It is important to us to make this tool open-source to maintain transparency and trust.
 
-## Supported Platforms
+## 3. Supported Platforms
 - Linux Based Systems (tested on Ubuntu & Debian)
 - Mac (in development)
 - Windows (in development)
 
-## TL; DR
+## 4. TL; DR
 - Simple to use
 - Creates a video device with protected modified video stream (see above), which can be selected by software as camera.
 - Adds a virtual background to protect the privacy of the user.
 - Is communication tools independent and therefore compatible with any communication software.
 
 
-## Setup / Installation
+## 5. Setup / Installation
 As mentioned above, the following steps are ONLY written for Linux-Systems.
 
 ### Prerequisites
@@ -49,7 +49,9 @@ Please follow step 1 or step 2 described above.
 ```
 
 ### Launch
-To be able use that tool, you need to run 2 services in total. The first one is javascript-based service that is responsible to distinguishing the foreground (you) from the background you would like to protect from recording using AI. The second service streams the modified video-stream to the virtual-device created by the command above (Prerequisites).
+To be able use that tool, you need to run 2 services in total. 
+- Service 1 is javascript-based service that is responsible to distinguishing the foreground (you) from the background you would like to protect from recording using AI. 
+- Service 2 streams the modified video-stream to the virtual-device created by the command above (Prerequisites).
 #### Service 1
 If you have followed STEP 1 at the installation steps, do this:
 ```bash
@@ -60,11 +62,13 @@ else (if you chose step 2):
     docker run -it --rm -d -p 9000:9000 quving/bodypix:latest
 ```
 
-### Service 2
+#### Service 2
 ```
 bash python3 ownyourcam.py
 ```
 
-Now your virtual-cam-device has been created and should be visible to communication-tools. Happy meeting!
+Now your virtual-cam-device has been created and should be visible to communication-tools. 
 
+
+Happy meeting! :heart:
 
