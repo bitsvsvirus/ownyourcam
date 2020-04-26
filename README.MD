@@ -11,6 +11,10 @@ As the name suggests, we propose a solution that enables the participants of vid
 
 It is important to us to make this tool open-source to maintain transparency and trust.
 
+
+### 2.1 Demo
+![](https://i.imgur.com/PJYUiPv.png)
+
 ### 2.1 Acknowledgement
 A big thank you goes to the creator of the package 'pyfakewebcam' who ported the v4l2 package from python2 to python3, which was very useful for our project.
 * https://pypi.org/project/pyfakewebcam
