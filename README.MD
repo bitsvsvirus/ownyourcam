@@ -1,7 +1,10 @@
 # OwnYourCam :sunglasses: :video_camera:
 
+
 ## 1. Motivation / Problem
 In times of Covid-19, many companies, institutions and courses rely on remote measures. Therefore, more and more communication tools are used to replace physical communication with virtual communication. School lessons, university seminars, lectures, conferences and also customer meetings are outsourced to tools like Zoom, Skype, Microsoft-Teams or Slack. The danger of losing aspects of privacy through audio and video communication is higher in times like these. Through video communication, for example, conclusions can be drawn about the life situation of the participants: The living room, bedroom and even family members can be unintentionally part of the video clip.
+
+<img src="https://i.imgur.com/AcEx6DU.png" width="200"/>
 
 ## 2. Solution
 As the name suggests, we propose a solution that enables the participants of video conferences to have more control over their webcam. 'OwnYourTool'is compatible with any communication software (Zoom, Skype, Microsoft-Teams Slack and many more). It creates a virtual cam device where the participant can be seen but his background can be replaced with a virtual background. This video input device can then be selected as a webcam device by communication tools. This protects the privacy of the participants, even if the communication tool does not have the function of displaying a virtual background like "Zoom.us". Furthermore, it also provides more security if the communication tool is compromised, since the insertion of a virtual background is not handled within communication tools.
@@ -33,7 +36,11 @@ As mentioned above, the following steps are ONLY written for Linux-Systems.
 3. NodeJs (recommended v12.16.2) or Docker
 4. Ubuntu package 'v4l2loopback-utils' to create a virtual video-device on hosts:
 ```
-sudo apt-get install v4l2loopback-utils
+    sudo apt-get install v4l2loopback-utils
+```
+5. Create a virtual-webcam device:
+```
+    modprobe v4l2loopback devices=1
 ```
 
 ### Dependencies
@@ -67,8 +74,9 @@ else (if you chose step 2):
 ```
 
 #### Service 2
+Run python-script.
 ```
-bash python3 ownyourcam.py
+python3 ownyourcam.py
 ```
 
 Now your virtual-cam-device has been created and should be visible to communication-tools. 
