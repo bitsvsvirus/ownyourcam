@@ -70,8 +70,9 @@ else (if you chose step 2):
 ```
 
 #### Service 2
+Run python-script.
 ```
-bash python3 ownyourcam.py
+python3 ownyourcam.py
 ```
 
 Now your virtual-cam-device has been created and should be visible to communication-tools. 
