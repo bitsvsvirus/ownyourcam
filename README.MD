@@ -32,7 +32,11 @@ As mentioned above, the following steps are ONLY written for Linux-Systems.
 3. NodeJs (recommended v12.16.2) or Docker
 4. Ubuntu package 'v4l2loopback-utils' to create a virtual video-device on hosts:
 ```
-sudo apt-get install v4l2loopback-utils
+    sudo apt-get install v4l2loopback-utils
+```
+5. Create a virtual-webcam device:
+```
+    modprobe v4l2loopback devices=1
 ```
 
 ### Dependencies
