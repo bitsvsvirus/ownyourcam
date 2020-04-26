@@ -72,7 +72,7 @@ if __name__ == '__main__':
     simulator = Simulator(
         width=640,
         height=480,
-        bg_path='assets/background.png',
+        bg_path='assets/background.jpeg',
         stream_to_vcam=False
     )
     simulator.simulate(show_stream=True)
